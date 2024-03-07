@@ -17,7 +17,7 @@ A Delphi library that makes it easier to work with command line applications
 
 ## Cli
 
-You can build and cmdgen application to quickly generate commands
+You can build and use the cmdgen application to quickly generate commands
 
 ## Usage
 
