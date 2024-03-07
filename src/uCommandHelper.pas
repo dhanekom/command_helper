@@ -17,6 +17,7 @@ type
     function AsBoolean : Boolean;
     function AsString : string;
     function AsVariant : Variant;
+    function Value : Variant;
     function ArgumentType : TArgumentType;
     procedure SetValue(aValue : Variant);
     procedure SetArgumentType(aValue : TArgumentType);
@@ -68,6 +69,7 @@ type
     function commandByCode(aCommandCode : string) : TCommand;
     function validateValues : Boolean;
     function getArgumentByCode(aCode : string) : TCommandArgument;
+    function values(aArgCode : string) : variant;
 
     procedure execute; virtual; abstract;
     constructor Create; virtual;
@@ -215,6 +217,25 @@ begin
   end;
 
   result := lValid;
+end;
+
+function TCommand.values(aArgCode: string): Variant;
+var
+  i : integer;
+begin
+  result := null;
+
+  if not aArgCode.StartsWith('-') then
+    aArgCode := '-'+aArgCode;
+
+  for i := 0 to FArguments.Count -1 do
+  begin
+    if FArguments[i].code = aArgCode then
+    begin
+      result := FArguments[i].value.Value;
+      Exit;
+    end;
+  end;
 end;
 
 constructor TCommand.Create;
@@ -482,6 +503,16 @@ end;
 procedure TArgumentValue.SetValue(aValue: Variant);
 begin
   FValue := aValue;
+end;
+
+function TArgumentValue.Value: Variant;
+begin
+  case FArgumentType of
+    atBoolean: result := AsBoolean;
+    atInteger: result := AsInteger;
+  else
+    result := AsString;
+  end;
 end;
 
 { TAppCommand }

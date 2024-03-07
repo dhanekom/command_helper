@@ -34,8 +34,8 @@ var
   lWords : string;
   lUppercase : Boolean;
 begin
-  lWords := getArgumentByCode('w').ValueAsString;
-  lUppercase := getArgumentByCode('u').ValueAsBoolean;
+  lWords := values('w');
+  lUppercase := values('u');
 
   if lUppercase then
     lWords := lWords.ToUpper;
