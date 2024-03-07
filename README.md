@@ -1,4 +1,4 @@
-# command helper
+# Command Helper Library
 
 A Delphi library that makes it easier to work with command line applications
 
