@@ -17,7 +17,6 @@ type
     function AsBoolean : Boolean;
     function AsString : string;
     function AsVariant : Variant;
-    function Value : Variant;
     function ArgumentType : TArgumentType;
     procedure SetValue(aValue : Variant);
     procedure SetArgumentType(aValue : TArgumentType);
@@ -232,7 +231,7 @@ begin
   begin
     if FArguments[i].code = aArgCode then
     begin
-      result := FArguments[i].value.Value;
+      result := FArguments[i].value.AsVariant;
       Exit;
     end;
   end;
@@ -503,16 +502,6 @@ end;
 procedure TArgumentValue.SetValue(aValue: Variant);
 begin
   FValue := aValue;
-end;
-
-function TArgumentValue.Value: Variant;
-begin
-  case FArgumentType of
-    atBoolean: result := AsBoolean;
-    atInteger: result := AsInteger;
-  else
-    result := AsString;
-  end;
 end;
 
 { TAppCommand }
