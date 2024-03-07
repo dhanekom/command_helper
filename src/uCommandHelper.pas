@@ -25,13 +25,11 @@ type
   TCommandArgument = class
   protected
     FCode : string;
-    FAlias : string;
     FDescription : string;
     FRequired : Boolean;
     FValue : TArgumentValue;
   public
     property code : string read FCode;
-    property alias : string read FAlias;
     property description : string read FDescription;
     property value : TArgumentValue read FValue write FValue;
     property required : boolean read FRequired;
@@ -43,7 +41,7 @@ type
     function ValueAsString : string;
     function ValueAsVariant : Variant;
 
-    constructor Create(aCode : string; aDesc : string; aArgumentType : TArgumentType; aRequired : boolean; aAlias : string = ''; aDefaultValue : string = '');
+    constructor Create(aCode : string; aDesc : string; aArgumentType : TArgumentType; aRequired : boolean; aDefaultValue : string = '');
     destructor Destroy; override;
   end;
 
@@ -128,7 +126,7 @@ procedure TCommand.parse(aParamPosition : Integer = 1);
 var
   lCommand : TCommand;
   lArg : TCommandArgument;
-  i : Integer;
+  i, x : Integer;
   lParamKeyValueArr : TArray<System.string>;
 begin
   if not validateCommands then
@@ -158,6 +156,7 @@ begin
   end;
 
   i := aParamPosition + 1;
+  x := 0;
   while i <= ParamCount do
   begin
     lParamKeyValueArr := ParamStr(i).Split(['=']);
@@ -167,22 +166,32 @@ begin
       Exit;
     end;
 
-    lArg := lCommand.getArgumentByCode(lParamKeyValueArr[0]);
-    if lArg = nil then
+    if length(lParamKeyValueArr) = 1 then
     begin
-      Writeln(Format('** argument "%s" not configured for command "%s" **', [lParamKeyValueArr[0], lCommand.code]));
-      Exit;
+      if lCommand.arguments.Count -1 < x then
+      begin
+        Writeln(Format('** too many argument values provide for command "%s" **', [lCommand.code]));
+        Exit;
+      end;
+
+      lArg := lCommand.arguments[x];
+    end
+    else
+    begin
+      lArg := lCommand.getArgumentByCode(lParamKeyValueArr[0]);
+      if lArg = nil then
+      begin
+        Writeln(Format('** argument "%s" not configured for command "%s" **', [lParamKeyValueArr[0], lCommand.code]));
+        Exit;
+      end;
     end;
 
     if length(lParamKeyValueArr) = 1 then
     begin
-      if lArg.value.argumentType <> TArgumentType.atBoolean then
-      begin
-        Writeln(Format('** argument "%s" requires a value **', [lArg.code]));
-        Exit;
-      end;
-
-      lArg.SetValue('true');
+      if lArg.value.argumentType = TArgumentType.atBoolean then
+        lArg.SetValue('true')
+      else
+        lArg.SetValue(lParamKeyValueArr[0]);
     end
     else
     begin
@@ -190,6 +199,7 @@ begin
     end;
 
     inc(i);
+    inc(x);
   end;
 
   if not lCommand.validateValues then
@@ -267,7 +277,7 @@ begin
 end;
 
 constructor TCommandArgument.Create(aCode : string; aDesc : string; aArgumentType : TArgumentType;
-  aRequired : boolean; aAlias : string = ''; aDefaultValue : string = '');
+  aRequired : boolean; aDefaultValue : string = '');
 begin
   FValue.SetArgumentType(aArgumentType);
 
@@ -276,7 +286,6 @@ begin
   FCode := '-'+aCode;
   FDescription := aDesc;
   FRequired := aRequired;
-  FAlias := aAlias;
   if aArgumentType = atBoolean then
   begin
     FValue.SetValue(StrToBoolDef(aDefaultValue, false));
