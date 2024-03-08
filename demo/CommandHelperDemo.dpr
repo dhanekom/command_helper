@@ -36,7 +36,7 @@ begin
                                  'Examle 4: (move has sub commands. Note how help is now displayed for the move command)'+#13#10+
                                  'CommandHelperDemo.exe move'+#13+#10+
                                  #13#10+
-                                 'Examle 5: (note that argument -w is defined for both the "ing" and "move up" commands. This is allowed)'+#13#10+
+                                 'Examle 5: (note that argument -w is defined for both the "sing" and "move up" commands. This is allowed)'+#13#10+
                                  'CommandHelperDemo.exe move up -s="Ahhh" -w';
                                  ;
 
