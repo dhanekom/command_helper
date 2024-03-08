@@ -16,9 +16,8 @@ var
   lAppCommand : TAppCommand;
 begin
   try
+    lAppCommand := TAppCommand.Create;
     try
-      lAppCommand := TAppCommand.Create;
-
       lAppCommand.commands.Add(TSingCommand.create);
       lAppCommand.commands.Add(TMoveCommand.create);
 
