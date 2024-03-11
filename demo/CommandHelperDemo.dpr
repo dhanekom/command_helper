@@ -22,9 +22,9 @@ begin
       lAppCommand.commands.Add(TMoveCommand.create);
 
       lAppCommand.description := 'This is a demo application that shows how to create an app using the uCommandHelpdesk library.'+#13#10+
-                                 'The examples below show how you can run this application with a command and argument(s)'+#13#10+
+                                 'The examples below show how you can run this application with a command and argument(s).'+#13#10+
                                  #13#10+
-                                 'Example 1: (Running the application without arguments will display help)'+#13#10+
+                                 'Example 1: (Running the application without arguments, the "-h" or "-help" arguments will display help)'+#13#10+
                                  'CommandHelperDemo.exe'+#13#10+
                                  #13#10+
                                  'Example 2: (If boolean arguments are omitted they default to false)'+#13#10+

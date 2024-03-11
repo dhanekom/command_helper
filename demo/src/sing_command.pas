@@ -23,9 +23,9 @@ begin
 
   FCode := 'sing';
   FAlias := 's';
-  FDescription := 'Sings a sons';
+  FDescription := 'Sing a song';
 
-  FArguments.Add(TCommandArgument.Create('w', 'Words of song', atString, true));
+  FArguments.Add(TCommandArgument.Create('w', 'Words of the song', atString, true));
   FArguments.Add(TCommandArgument.Create('u', 'Uppercase the words', atBoolean, true));
 end;
 

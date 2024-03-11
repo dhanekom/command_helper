@@ -57,7 +57,7 @@ The sample code above will create a list_command.pas in the "myapp\src" director
   lAppCommand.commands.add(TListCommand.Create);
 ```
 
-You can add an application description with the appDescription property. See example below:
+You can add an application description by assigning a description to the TAppCommand instance:
 
 ```
   lAppCommand.description := 'Sample app description';

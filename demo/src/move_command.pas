@@ -23,7 +23,7 @@ begin
 
   FCode := 'move';
   FAlias := 'm';
-  FDescription := 'Sample description';
+  FDescription := 'Move in a direction';
 
   FCommands.Add(TMoveUpCommand.Create);
   FCommands.Add(TMoveDownCommand.Create);
