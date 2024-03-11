@@ -161,10 +161,10 @@
                 </Source>
             </Delphi.Personality>
             <Platforms>
-                <Platform value="Android">0</Platform>
-                <Platform value="Android64">0</Platform>
-                <Platform value="Win32">1</Platform>
-                <Platform value="Win64">0</Platform>
+                <Platform value="Android">False</Platform>
+                <Platform value="Android64">False</Platform>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
             </Platforms>
             <Deployment Version="3">
                 <DeployFile LocalName="Win32\Debug\CommandHelperDemo.exe" Configuration="Debug" Class="ProjectOutput">
