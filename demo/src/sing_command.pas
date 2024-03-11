@@ -26,7 +26,7 @@ begin
   FDescription := 'Sings a sons';
 
   FArguments.Add(TCommandArgument.Create('w', 'Words of song', atString, true));
-  FArguments.Add(TCommandArgument.Create('u', 'Uppercase the word', atBoolean, true));
+  FArguments.Add(TCommandArgument.Create('u', 'Uppercase the words', atBoolean, true));
 end;
 
 procedure TSingCommand.execute;
