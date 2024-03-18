@@ -6,7 +6,7 @@ uses
   System.Generics.Collections, System.SysUtils, System.Variants, System.Generics.Defaults;
 
 type
-  TArgumentType = (atString, atBoolean, atInteger);
+  TArgumentType = (atString, atBoolean, atInteger, atFloat);
 
   TArgumentValue = record
   private
@@ -16,6 +16,7 @@ type
     function AsInteger : Integer;
     function AsBoolean : Boolean;
     function AsString : string;
+    function AsFloat : Extended;
     function AsVariant : Variant;
     function ArgumentType : TArgumentType;
     procedure SetValue(aValue : Variant);
@@ -37,6 +38,7 @@ type
     procedure SetValue(aValue : string);
     function hasValue : Boolean;
     function ValueAsInteger : Integer;
+    function ValueAsFloat : Extended;
     function ValueAsBoolean : Boolean;
     function ValueAsString : string;
     function ValueAsVariant : Variant;
@@ -93,6 +95,7 @@ begin
     atString: result := 'string';
     atBoolean: result := 'boolean';
     atInteger: result := 'integer';
+    atFloat: result := 'float';
   end;
 end;
 
@@ -259,6 +262,11 @@ end;
 function TCommandArgument.ValueAsBoolean: Boolean;
 begin
   result := value.AsBoolean;
+end;
+
+function TCommandArgument.ValueAsFloat: Extended;
+begin
+  result := value.AsFloat;
 end;
 
 function TCommandArgument.ValueAsInteger: Integer;
@@ -486,6 +494,11 @@ end;
 function TArgumentValue.AsBoolean: Boolean;
 begin
   result := StrToBool(FValue);
+end;
+
+function TArgumentValue.AsFloat: Extended;
+begin
+  result := StrToFloat(FValue);
 end;
 
 function TArgumentValue.AsInteger: Integer;

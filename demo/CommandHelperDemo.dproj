@@ -139,6 +139,7 @@
         <DCCReference Include="src\move_command.pas"/>
         <DCCReference Include="src\move_down_command.pas"/>
         <DCCReference Include="src\move_up_command.pas"/>
+        <DCCReference Include="src\temperature_command.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

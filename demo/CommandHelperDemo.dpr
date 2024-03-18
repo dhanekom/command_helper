@@ -10,7 +10,8 @@ uses
   sing_command in 'src\sing_command.pas',
   move_command in 'src\move_command.pas',
   move_down_command in 'src\move_down_command.pas',
-  move_up_command in 'src\move_up_command.pas';
+  move_up_command in 'src\move_up_command.pas',
+  temperature_command in 'src\temperature_command.pas';
 
 var
   lAppCommand : TAppCommand;
@@ -20,6 +21,7 @@ begin
     try
       lAppCommand.commands.Add(TSingCommand.create);
       lAppCommand.commands.Add(TMoveCommand.create);
+      lAppCommand.commands.Add(TTemperatureCommand.create);
 
       lAppCommand.description := 'This is a demo application that shows how to create an app using the uCommandHelpdesk library.'+#13#10+
                                  'The examples below show how you can run this application with a command and argument(s).'+#13#10+
